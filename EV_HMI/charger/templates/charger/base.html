@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'charger/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    {% if title %}
+    <title>Charger - {{ title }}</title>
+    {% else %}
+    <title>Charger</title>
+    {% endif %}
+</head>
+<body>
+
+    <nav id="navbar" class="z-depth-4">
+        <div class="container nav-wrapper">
+            <a href="/" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{% url 'charger-home' %}">Home</a></li>
+                <li><a href="{% url 'charger-about' %}">About</a></li>
+                <li><a href="#">Placeholder</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="maincontent" class="row">
+      <div id="sidebar" class="col s2 z-depth-3">
+        blabla
+      </div>
+
+      <div class="col s10">
+        <div class="container">
+        {% block content %}{% endblock %}
+        </div>
+      </div>
+
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
