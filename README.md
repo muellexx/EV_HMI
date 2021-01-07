@@ -1,0 +1,1 @@
+A Django Homepage designed to control monitor and control a grid of EV chargers
