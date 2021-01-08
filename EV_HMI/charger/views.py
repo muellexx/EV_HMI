@@ -27,3 +27,6 @@ def home(request):
 
 def about(request):
     return render(request, 'charger/about.html')
+
+def dashboard(request):
+    return render(request, 'charger/dashboard.html')

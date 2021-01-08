@@ -21,7 +21,7 @@
         <div class="container nav-wrapper">
             <a href="/" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{% url 'charger-home' %}">Home</a></li>
+                <li><a href="{% url 'charger-home' %}">News</a></li>
                 <li><a href="{% url 'charger-about' %}">About</a></li>
                 <li><a href="#">Placeholder</a></li>
             </ul>
@@ -36,22 +36,23 @@
                     Here shall be a profile picture and some information about the currently logged in user and her or his company.
                 </span>
             </div>
-
-            <a href="#" class="sidebar-item collection-item">Dashboard</a>
-            <a href="#" class="sidebar-item collection-item active">Map</a>
+            {% url 'charger-dashboard' as url_dashboard %}
+            {% url 'charger-home' as url_home %}
+            <a href="{% url 'charger-dashboard' %}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
+            <a href="#" class="sidebar-item collection-item">Map</a>
             <a href="#" class="sidebar-item collection-item">Loadmanagement</a>
             <a href="#" class="sidebar-item collection-item">Report</a>
             <a href="#" class="sidebar-item collection-item">Stations</a>
             <a href="#" class="sidebar-item collection-item">Maintenance</a>
+            <a href="{{ url_home }}" class="sidebar-item collection-item {% if request.get_full_path == url_home %}active{% endif %}">TempNews</a>
         </div>
 
-        <div class="col s10">
-            <div class="container">
+        <div class="col s10 p0">
+            <div id="main-panel" class="container">
                 {% block content %}{% endblock %}
             </div>
         </div>
 
-    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

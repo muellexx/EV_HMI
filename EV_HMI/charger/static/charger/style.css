@@ -56,3 +56,22 @@ body {
   margin: 0;
   padding: 0;
 }
+
+#main-panel {
+  height: 100%;
+  width: 100%;
+}
+
+.p0 {
+  padding: 0!important;
+}
+
+#panel-titel {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#panel-content {
+  width: 95%;
+  margin: 0 auto;
+}
