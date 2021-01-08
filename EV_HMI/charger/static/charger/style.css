@@ -24,7 +24,30 @@ body {
 #sidebar {
   height: 100%;
   margin: 0;
-  padding: 30px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#sidebar .card-panel {
+  margin: 0;
+}
+
+#sidebar a {
+  border-bottom: 0;
+}
+
+#sidebar .sidebar-item.active {
+  background-color: #32CD32;
+}
+
+.sidebar-item {
+  display:block;
+  transition: .25s;
+  color: #26a69a;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin: 0;
 }
 
 #maincontent {
