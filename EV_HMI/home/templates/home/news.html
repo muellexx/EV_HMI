@@ -4,9 +4,20 @@ News
 {% endblock panel_title %}
 
 {% block panel_content %}
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        <p>By {{ post.author }} on {{ post.date_posted }}</p>
-        <p>{{ post.content }}</p>
-    {% endfor %}
+{% for post in posts %}
+<div class="card horizontal">
+    <div class="card-stacked">
+        <div class="card-content py-1">
+            <p><a href="#" class="mr-2">{{ post.author }},</a> {{ post.date_posted|date:"F d, Y" }}</p>
+            <span class="card-title">{{ post.title }}</span>
+        </div>
+        <div class="card-action card-content">
+            <p>{{ post.content }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
 {% endblock panel_content %}
