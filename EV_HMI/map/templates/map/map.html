@@ -1,0 +1,16 @@
+{% extends "charger/base.html" %}
+{% load static %}
+
+{% block style_sheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'map/map.css' %}">
+{% endblock style_sheets %}
+
+{% block content %}
+    <div id="map"></div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4FzVGy5foAnrj5soy0wTrRF2Htq_ZZdI&callback=initMap&libraries=&v=weekly" defer></script>
+    <script src="{% static 'map/init-map.js' %}"></script>
+{% endblock scripts %}

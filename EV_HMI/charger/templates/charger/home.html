@@ -1,8 +1,12 @@
-{% extends "charger/base.html" %}
-{% block content %}
+{% extends "charger/base_panel.html" %}
+{% block panel_title %}
+News
+{% endblock panel_title %}
+
+{% block panel_content %}
     {% for post in posts %}
-        <h1>{{ post.title }}</h1>
+        <h4>{{ post.title }}</h4>
         <p>By {{ post.author }} on {{ post.date_posted }}</p>
         <p>{{ post.content }}</p>
     {% endfor %}
-{% endblock content %}
+{% endblock panel_content %}

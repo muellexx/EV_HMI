@@ -1,0 +1,13 @@
+{% extends "charger/base.html" %}
+{% block content %}
+<div class="col s10 p0">
+    <div id="main-panel" class="container">
+        <div id="panel-titel">
+            <h3>{% block panel_title %}{% endblock %}</h3>
+        </div>
+        <div id="panel-content">
+            {% block panel_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
