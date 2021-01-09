@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'charger/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -23,8 +23,8 @@
         <div class="container nav-wrapper">
             <a href="/" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{% url 'charger-home' %}">News</a></li>
-                <li><a href="{% url 'charger-about' %}">About</a></li>
+                <li><a href="{% url 'home-news' %}">News</a></li>
+                <li><a href="{% url 'home-about' %}">About</a></li>
                 <li><a href="#">Placeholder</a></li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
                 </span>
             </div>
             {% url 'charger-dashboard' as url_dashboard %}
-            {% url 'charger-home' as url_home %}
+            {% url 'home-news' as url_home %}
             {% url 'map-view' as url_map %}
             <a href="{{ url_dashboard }}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
             <a href="{{ url_map }}" class="sidebar-item collection-item {% if request.get_full_path == url_map %}active{% endif %}">Map</a>
