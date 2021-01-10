@@ -26,29 +26,33 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="{% url 'home-news' %}">News</a></li>
                 <li><a href="{% url 'home-about' %}">About</a></li>
-                <li><a href="#">Placeholder</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
+
     <div id="maincontent" class="row">
-
-        <div id="sidebar" class="col s2 z-depth-3 collection">
-
-            <div class="card-panel teal">
+        <div id="sidebar" class="col s2">
+            <div id="sidebar-fixed" class="col s2 z-depth-3">
+                <div class="card-panel teal">
                 <span class="white-text">I am a placeholder.
                     Here shall be a profile picture and some information about the currently logged in user and her or his company.
                 </span>
+                </div>
+                {% url 'charger-dashboard' as url_dashboard %}
+                {% url 'home-news' as url_home %}
+                {% url 'map-view' as url_map %}
+                <a href="{{ url_dashboard }}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
+                <a href="{{ url_map }}" class="sidebar-item collection-item {% if request.get_full_path == url_map %}active{% endif %}">Map</a>
+                <a href="#" class="sidebar-item collection-item">Loadmanagement</a>
+                <a href="#" class="sidebar-item collection-item">Report</a>
+                <a href="#" class="sidebar-item collection-item">Stations</a>
+                <a href="#" class="sidebar-item collection-item">Maintenance</a>
+                <a href="{{ url_home }}" class="sidebar-item collection-item {% if request.get_full_path == url_home %}active{% endif %}">TempNews</a>
             </div>
-            {% url 'charger-dashboard' as url_dashboard %}
-            {% url 'home-news' as url_home %}
-            {% url 'map-view' as url_map %}
-            <a href="{{ url_dashboard }}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
-            <a href="{{ url_map }}" class="sidebar-item collection-item {% if request.get_full_path == url_map %}active{% endif %}">Map</a>
-            <a href="#" class="sidebar-item collection-item">Loadmanagement</a>
-            <a href="#" class="sidebar-item collection-item">Report</a>
-            <a href="#" class="sidebar-item collection-item">Stations</a>
-            <a href="#" class="sidebar-item collection-item">Maintenance</a>
-            <a href="{{ url_home }}" class="sidebar-item collection-item {% if request.get_full_path == url_home %}active{% endif %}">TempNews</a>
         </div>
 
         {% block content %}{% endblock %}

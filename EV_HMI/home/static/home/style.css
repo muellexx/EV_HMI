@@ -29,15 +29,24 @@ body {
   position: relative;
 }
 
-#sidebar .card-panel {
+#sidebar-fixed {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  background-color: #fff;
+}
+
+#sidebar-fixed .card-panel {
   margin: 0;
 }
 
-#sidebar a {
+#sidebar-fixed a {
   border-bottom: 0;
 }
 
-#sidebar .sidebar-item.active {
+#sidebar-fixed .sidebar-item.active {
   background-color: #32CD32;
 }
 
@@ -45,7 +54,6 @@ body {
   display:block;
   transition: .25s;
   color: #26a69a;
-  background-color: #fff;
   padding: 10px 20px;
   margin: 0;
 }
@@ -55,15 +63,12 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
 }
 
 #main-panel {
   height: 100%;
   width: 100%;
-}
-
-.p0 {
-  padding: 0!important;
 }
 
 #panel-titel {
