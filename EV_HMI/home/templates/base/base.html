@@ -24,6 +24,7 @@
         <div class="container nav-wrapper">
             {% url 'home-news' as url_news %}
             {% url 'home-about' as url_about %}
+            {% url 'profile' as url_profile %}
             {% url 'logout' as url_logout %}
             {% url 'register' as url_register %}
             {% url 'login' as url_login %}
@@ -36,6 +37,7 @@
                 </div>
                 <div class="right hide-on-med-and-down">
                     {% if user.is_authenticated %}
+                    <li class="{% if request.get_full_path == url_profile %}active{% endif %}"><a href="{{ url_profile }}">Profile</a></li>
                     <li class="{% if request.get_full_path == url_logout %}active{% endif %}"><a href="{{ url_logout }}">Logout</a></li>
                     {% else %}
                     <li class="{% if request.get_full_path == url_register %}active{% endif %}"><a href="{{ url_register }}">Register</a></li>

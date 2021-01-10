@@ -1,0 +1,21 @@
+{% extends "base/base_panel.html" %}
+{% block panel_title %}
+Profile
+{% endblock panel_title %}
+
+{% block panel_content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel">
+            <div class="row valign-wrapper">
+                <img class="circle account-img" src="{{ user.profile.image.url }}">
+                <div class="full-wh mr-5">
+                    <h4 class="mt-0">{{ user.username }}</h4>
+                    <p>{{ user.email }}</p>
+                    <p class="right-align"><a href="#">edit Profile</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock panel_content %}
