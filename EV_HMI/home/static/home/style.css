@@ -88,6 +88,13 @@ body {
   margin-bottom: 16px;
 }
 
+.account-img-small {
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
 .full-wh {
   height: 100%;
   width:100%

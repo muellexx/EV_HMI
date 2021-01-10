@@ -1,0 +1,28 @@
+        <div id="sidebar" class="col s2">
+            <div id="sidebar-fixed" class="col s2 z-depth-3">
+                {% if user.is_authenticated %}
+                <div class="card-panel teal">
+                    <div class="row valign-wrapper mb-1">
+                        <a href="{% url 'profile' %}"><img class="circle account-img-small" src="{{ user.profile.image.url }}"></a>
+                        <div class="full-wh mr-5">
+                            <h5 class="mt-0">{{ user.username }}</h5>
+                        </div>
+                    </div>
+                    <span class="white-text">
+                        Here shall be some information about the current user and his company.
+                    </span>
+                </div>
+                {% endif %}
+                {% url 'charger-dashboard' as url_dashboard %}
+                {% url 'home-news' as url_news %}
+                {% url 'map-view' as url_map %}
+                <a href="{{ url_dashboard }}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
+                <a href="{{ url_map }}" class="sidebar-item collection-item {% if request.get_full_path == url_map %}active{% endif %}">Map</a>
+                <a href="#" class="sidebar-item collection-item">Loadmanagement</a>
+                <a href="#" class="sidebar-item collection-item">Report</a>
+                <a href="#" class="sidebar-item collection-item">Stations</a>
+                <a href="#" class="sidebar-item collection-item">Maintenance</a>
+                <a href="#" class="sidebar-item collection-item">Alarm</a>
+                <a href="{{ url_news }}" class="sidebar-item collection-item {% if request.get_full_path == url_news %}active{% endif %}">TempNews</a>
+            </div>
+        </div>
