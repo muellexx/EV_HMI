@@ -8,8 +8,13 @@ News
 <div class="card horizontal">
     <div class="card-stacked">
         <div class="card-content py-1">
-            <p><a href="#" class="mr-2">{{ post.author }},</a> {{ post.date_posted|date:"F d, Y" }}</p>
-            <span class="card-title">{{ post.title }}</span>
+            <div class="row valign-wrapper mb-0 mt-1">
+                <img class="circle account-img-small" src="{{ post.author.profile.image.url }}">
+                <div class="full-wh mr-5">
+                    <p><a href="#" class="mr-2">{{ post.author }},</a> {{ post.date_posted|date:"F d, Y" }}</p>
+                    <span class="card-title">{{ post.title }}</span>
+                </div>
+            </div>
         </div>
         <div class="card-action card-content">
             <p>{{ post.content }}</p>

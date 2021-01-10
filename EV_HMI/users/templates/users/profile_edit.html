@@ -12,9 +12,16 @@ Profile
                 <div class="full-wh mr-5">
                     <h4 class="mt-0">{{ user.username }}</h4>
                     <p>{{ user.email }}</p>
-                    <p class="right-align"><a href={% url 'profile-edit' %}>edit Profile</a></p>
                 </div>
             </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ u_form.as_p }}
+                {{ p_form.as_p }}
+                <button class="btn waves-effect waves-light orange" type="submit" name="action">Update
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
         </div>
     </div>
 </div>
