@@ -10,6 +10,7 @@
             {% endfor %}
         {% endif %}
         <div id="panel-titel">
+            <div style="float: right;">{% block panel_topright_button %}{% endblock %}</div>
             <h3>{% block panel_title %}{% endblock %}</h3>
         </div>
         <div id="panel-content">

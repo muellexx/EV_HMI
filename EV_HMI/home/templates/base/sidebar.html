@@ -1,7 +1,7 @@
         <div id="sidebar" class="col s5 m4 l3 xl2 ">
-            <div id="sidebar-fixed" class="col s5 m4 l3 xl2 z-depth-2">
+            <div id="sidebar-fixed" class="col s5 m4 l3 xl2 z-depth-3">
                 {% if user.is_authenticated %}
-                <div class="card-panel teal m-1 z-depth-3">
+                <div class="card-panel teal m-1 z-depth-4">
                     <div class="row valign-wrapper mb-1">
                         <a href="{% url 'profile' %}"><img class="circle account-img-small" src="{{ user.profile.image.url }}"></a>
                         <div class="full-wh mr-5">

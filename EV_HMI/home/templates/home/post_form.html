@@ -1,7 +1,7 @@
 {% extends "base/base_panel.html" %}
 {% load crispy_forms_tags %}
 {% block panel_title %}
-Log In
+Edit Post
 {% endblock panel_title %}
 
 {% block panel_content %}
@@ -11,16 +11,10 @@ Log In
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn waves-effect waves-light z-depth-3" type="submit" name="action">Log In
+                <button class="btn waves-effect waves-light z-depth-3" type="submit" name="action">Post
                     <i class="material-icons right">send</i>
                 </button>
-
             </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">
-                    Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-                </small>
-            </div>
         </div>
     </div>
 </div>

@@ -99,3 +99,12 @@ body {
   height: 100%;
   width:100%
 }
+
+.article-title {
+  color: #333333;
+  font-weight: 400 !important
+}
+
+textarea {
+  height: auto !important
+}
