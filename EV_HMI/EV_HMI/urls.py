@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('', include('users.urls')),
     path('charger/', include('charger.urls')),
     path('map/', include('map.urls')),
+    path('settings/', include('settings.urls')),
+    path('', include('home.urls')),
+    path('', include('users.urls')),
 ]
 
 if settings.DEBUG:

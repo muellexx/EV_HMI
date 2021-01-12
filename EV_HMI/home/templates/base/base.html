@@ -23,7 +23,9 @@
 {% include "base/navbar.html" %}
 
     <div id="maincontent" class="row">
+        {% if user.is_authenticated %}
         {% include "base/sidebar.html" %}
+        {% endif %}
 
         {% block content %}{% endblock %}
 
