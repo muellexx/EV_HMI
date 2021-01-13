@@ -20,12 +20,12 @@
                     {% if user.is_authenticated %}
                     <li class="{% if request.get_full_path == url_profile %}active{% endif %}"><a href="{{ url_profile }}">Profile</a></li>
                     <li class="{% if request.get_full_path == url_logout %}active{% endif %}"><a href="{{ url_logout }}">Logout</a></li>
+                    <li class="{% if url_settings in request.get_full_path %}active{% endif %}"><a href="{% url 'profile-edit' %}">Settings</a></li>
                     {% else %}
                     <li class="{% if request.get_full_path == url_register %}active{% endif %}"><a href="{{ url_register }}">Register</a></li>
                     <li class="{% if request.get_full_path == url_login %}active{% endif %}"><a href="{{ url_login }}">Login</a></li>
                     {% endif %}
                     {% if user.is_staff %}
-                    <li class="{% if url_settings in request.get_full_path %}active{% endif %}"><a href="{% url 'profile-edit' %}">Settings</a></li>
                     <li class="{% if request.get_full_path == url_admin %}active{% endif %}"><a href="{{ url_admin }}">Admin</a></li>
                     {% endif %}
                 </div>

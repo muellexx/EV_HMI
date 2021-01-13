@@ -24,6 +24,9 @@
                 <a href="{{ url_password_change }}" class="sidebar-item collection-item {% if request.get_full_path == url_password_change %}active{% endif %}">Change Password</a>
                 <a href="{{ url_settings }}" class="sidebar-item collection-item {% if request.get_full_path == url_settings %}active{% endif %}">User List</a>
                 <a href="#" class="sidebar-item collection-item">Company</a>
+                {% if perms.auth %}
+                hohoho
+                {% endif %}
                 {% else %}
                 {% url 'charger-dashboard' as url_dashboard %}
                 {% url 'home-news' as url_news %}
