@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm
+from .models import Company
 
 
 def register(request):
@@ -42,3 +43,17 @@ def profile_edit(request):
         'p_form': p_form,
     }
     return render(request, 'users/profile_edit.html', context)
+
+
+def create_company(request):
+    if request.method == 'POST':
+        form = CompanyCreateForm(request.POST)
+        if form.is_valid():
+            group = form.save()
+            company = Company(group=group)
+            company.save()
+            messages.success(request, f'You successfully created a new company.')
+            return redirect('profile')
+    else:
+        form = CompanyCreateForm()
+    return render(request, 'users/company_create.html', {'form': form})

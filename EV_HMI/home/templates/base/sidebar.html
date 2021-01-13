@@ -20,12 +20,14 @@
                 {% if url_settings in request.get_full_path %}
                 {% url 'profile-edit' as url_profile_edit %}
                 {% url 'password-change' as url_password_change %}
+                {% url 'settings-company-list' as url_company_list %}
+                {% url 'create-company' as url_create_company %}
                 <a href="{{ url_profile_edit }}" class="sidebar-item collection-item {% if request.get_full_path == url_profile_edit %}active{% endif %}">Profile</a>
                 <a href="{{ url_password_change }}" class="sidebar-item collection-item {% if request.get_full_path == url_password_change %}active{% endif %}">Change Password</a>
                 <a href="{{ url_settings }}" class="sidebar-item collection-item {% if request.get_full_path == url_settings %}active{% endif %}">User List</a>
-                <a href="#" class="sidebar-item collection-item">Company</a>
-                {% if perms.auth %}
-                hohoho
+                <a href="{{ url_company_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_company_list %}active{% endif %}">Company List</a>
+                {% if user.is_staff %}
+                <a href="{{ url_create_company }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_company %}active{% endif %}">Create Company</a>
                 {% endif %}
                 {% else %}
                 {% url 'charger-dashboard' as url_dashboard %}
