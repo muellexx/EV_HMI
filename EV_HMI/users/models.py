@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.urls import reverse
 from PIL import Image
 
 
@@ -47,6 +48,9 @@ class Company(models.Model):
             output_size = (500, 500)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+    def get_absolute_url(self):
+        return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 class CompanyAddress(models.Model):

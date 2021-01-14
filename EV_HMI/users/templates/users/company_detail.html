@@ -1,35 +1,31 @@
 {% extends "base/base_panel.html" %}
 
 {% block panel_topright_button %}
-{% if user.is_authenticated %}
-<a class="btn waves-effect waves-light z-depth-3" href="{% url 'post-create' %}">Create Post</a>
+{% if user.is_staff %}
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="#">Edit</a>
 {% endif %}
 {% endblock panel_topright_button %}
 
 {% block panel_title %}
-Companies
+{{ object.group }}
 {% endblock panel_title %}
 
 {% block panel_content %}
-
-{% for company in companies %}
 <div class="card horizontal">
     <div class="card-stacked">
         <div class="card-content py-1">
             <div class="row valign-wrapper mb-0 mt-1">
-                <img class="circle account-img-small" src="{{ company.image.url }}">
+                <img class="circle account-img" src="{{ object.image.url }}">
                 <div class="full-wh mr-5">
-                    <p><a href="{% url 'company-detail' company.pk %}" class="mr-2">{{ company.group }}</a></p>
+                    <h4>{{ object.group }}</h4>
+                    <span class="article-title card-title">{{ object.title }}</span>
                 </div>
             </div>
         </div>
         <div class="card-action card-content">
-            <p></p>
+            <p>{{ object.content }}</p>
         </div>
     </div>
 </div>
-{% endfor %}
-
-
 
 {% endblock panel_content %}

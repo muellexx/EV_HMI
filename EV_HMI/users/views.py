@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm
 from .models import Company
 
@@ -57,3 +58,7 @@ def create_company(request):
     else:
         form = CompanyCreateForm()
     return render(request, 'users/company_create.html', {'form': form})
+
+
+class CompanyDetailView(DetailView):
+    model = Company
