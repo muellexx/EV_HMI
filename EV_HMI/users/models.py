@@ -73,3 +73,6 @@ class CompanyEmployee(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     admin = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username + " (" + self.company.group.name + ")"

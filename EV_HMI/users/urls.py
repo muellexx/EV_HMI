@@ -5,6 +5,7 @@ from .views import CompanyDetailView
 
 urlpatterns = [
     path('register/', views.register, name='register'),
+    path('register/<int:pk>/', views.register_employee, name='register-employee'),
     path('profile/', views.profile, name='profile'),
     path('settings/profile/', views.profile_edit, name='profile-edit'),
     path('settings/create_company/', views.create_company, name='create-company'),

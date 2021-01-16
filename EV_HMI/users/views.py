@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm
-from .models import Company
+from .models import Company, CompanyEmployee
+from .decorators import user_is_authorized
 
 
 def register(request):
@@ -62,3 +63,21 @@ def create_company(request):
 
 class CompanyDetailView(DetailView):
     model = Company
+
+
+@user_is_authorized
+def register_employee(request, pk):
+    print(request.user)
+    company = Company.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            company_employee = CompanyEmployee(user=user, company=company)
+            company_employee.save()
+            company.group.user_set.add(user)
+            messages.success(request, f'You successfully added an employee')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'users/register_employee.html', {'form': form, 'company': company})
