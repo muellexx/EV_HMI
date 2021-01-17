@@ -1,0 +1,19 @@
+{% url 'settings-user-list' as url_settings %}
+{% url 'profile' as url_profile %}
+{% url 'profile-edit' as url_profile_edit %}
+{% url 'password-change' as url_password_change %}
+{% url 'settings-company-list' as url_company_list %}
+{% url 'create-company' as url_create_company %}
+
+<a href="{{ url_profile }}" class="sidebar-item collection-item {% if request.get_full_path == url_profile %}active{% endif %}">Profile</a>
+{% for company in user.profile.get_companies %}
+{% url 'company-detail' company.company.pk as url_company_detail %}
+<a href="{{ url_company_detail }}" class="sidebar-item collection-item {% if request.get_full_path == url_company_detail %}active{% endif %}">{{ company.company }}</a>
+{% endfor %}
+<a href="{{ url_profile_edit }}" class="sidebar-item collection-item {% if request.get_full_path == url_profile_edit %}active{% endif %}">Profile Edit</a>
+<a href="{{ url_password_change }}" class="sidebar-item collection-item {% if request.get_full_path == url_password_change %}active{% endif %}">Change Password</a>
+<a href="{{ url_settings }}" class="sidebar-item collection-item {% if request.get_full_path == url_settings %}active{% endif %}">User List</a>
+<a href="{{ url_company_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_company_list %}active{% endif %}">Company List</a>
+{% if user.is_staff %}
+<a href="{{ url_create_company }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_company %}active{% endif %}">Create Company</a>
+{% endif %}

@@ -1,4 +1,9 @@
 {% extends "base/base_panel.html" %}
+
+{% block panel_topright_button %}
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'profile-edit' %}">edit Profile</a>
+{% endblock panel_topright_button %}
+
 {% block panel_title %}
 Profile
 {% endblock panel_title %}
@@ -6,15 +11,21 @@ Profile
 {% block panel_content %}
 <div class="row">
     <div class="col s12">
-        <div class="card-panel">
+        <div class="card-panel pt-3">
             <div class="row valign-wrapper">
                 <img class="circle account-img" src="{{ user.profile.image.url }}">
                 <div class="full-wh mr-5">
                     <h4 class="mt-0">{{ user.username }}</h4>
                     <p>{{ user.email }}</p>
-                    <p class="right-align"><a href={% url 'profile-edit' %}>edit Profile</a></p>
+                    <p>{% if user.is_superuser %}Admin{% endif %}</p>
                 </div>
             </div>
+            {% for company in user.profile.get_companies %}
+            <div class="card-panel">
+                <img class="responsive-img company-img" src="{{ company.company.image.url }}">
+                <h5 class="text-align: center">{{ company.company.group }}</h5>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

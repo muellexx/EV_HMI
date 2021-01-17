@@ -17,12 +17,13 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form, 'title': 'Register', 'sidebar': 'Profile'})
 
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    context = {'title': 'Profile', 'sidebar': 'Profile'}
+    return render(request, 'users/profile.html', context)
 
 
 @login_required
@@ -43,6 +44,8 @@ def profile_edit(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
+        'title': 'Profile Edit',
+        'sidebar': 'Settings',
     }
     return render(request, 'users/profile_edit.html', context)
 
@@ -58,11 +61,17 @@ def create_company(request):
             return redirect('profile')
     else:
         form = CompanyCreateForm()
-    return render(request, 'users/company_create.html', {'form': form})
+    return render(request, 'users/company_create.html', {'form': form, 'title': 'Company Create', 'sidebar': 'Settings'})
 
 
 class CompanyDetailView(DetailView):
     model = Company
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Company Detail'
+        context['sidebar'] = 'Profile'
+        return context
 
 
 @user_is_authorized
@@ -80,4 +89,4 @@ def register_employee(request, pk):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register_employee.html', {'form': form, 'company': company})
+    return render(request, 'users/register_employee.html', {'form': form, 'company': company, 'title': 'Add Employee', 'sidebar': 'Settings'})

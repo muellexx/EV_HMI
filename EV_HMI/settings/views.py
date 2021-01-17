@@ -16,6 +16,8 @@ class UserListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(UserListView, self).get_context_data(**kwargs)
         context['users'] = User.objects.all()
+        context['title'] = 'User List'
+        context['sidebar'] = 'Settings'
         return context
 
 
@@ -30,4 +32,6 @@ class CompanyListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(CompanyListView, self).get_context_data(**kwargs)
         context['companies'] = Company.objects.all()
+        context['title'] = 'Company List'
+        context['sidebar'] = 'Settings'
         return context

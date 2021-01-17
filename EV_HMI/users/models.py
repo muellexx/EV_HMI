@@ -30,6 +30,9 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+    def get_companies(self):
+        return self.user.companyemployee_set.all()
+
 
 class Company(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE)

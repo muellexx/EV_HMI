@@ -1,0 +1,9 @@
+{% url 'charger-dashboard' as url_dashboard %}
+{% url 'map-view' as url_map %}
+<a href="{{ url_dashboard }}" class="sidebar-item collection-item {% if request.get_full_path == url_dashboard %}active{% endif %}">Dashboard</a>
+<a href="{{ url_map }}" class="sidebar-item collection-item {% if request.get_full_path == url_map %}active{% endif %}">Map</a>
+<a href="#" class="sidebar-item collection-item">Loadmanagement</a>
+<a href="#" class="sidebar-item collection-item">Report</a>
+<a href="#" class="sidebar-item collection-item">Stations</a>
+<a href="#" class="sidebar-item collection-item">Maintenance</a>
+<a href="#" class="sidebar-item collection-item">Alarm</a>
