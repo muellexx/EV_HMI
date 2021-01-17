@@ -1,3 +1,10 @@
+{% url 'profile' as url_profile %}
+
+<a href="{{ url_profile }}" class="sidebar-item collection-item {% if request.get_full_path == url_profile %}active{% endif %}">Profile</a>
+{% for company in user.profile.get_companies %}
+{% url 'company-detail' company.company.pk as url_company_detail %}
+<a href="{{ url_company_detail }}" class="sidebar-item collection-item {% if request.get_full_path == url_company_detail %}active{% endif %}">{{ company.company }}</a>
+{% endfor %}
 <a href="#" class="sidebar-item collection-item">Placeholder</a>
 <a href="#" class="sidebar-item collection-item">Placeholder</a>
 <a href="#" class="sidebar-item collection-item">Placeholder</a>

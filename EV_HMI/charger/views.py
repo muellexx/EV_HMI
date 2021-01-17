@@ -2,4 +2,5 @@ from django.shortcuts import render
 
 
 def dashboard(request):
-    return render(request, 'charger/dashboard.html')
+    context = {'title': 'Dashboard', 'sidebar': 'Home'}
+    return render(request, 'charger/dashboard.html', context)
