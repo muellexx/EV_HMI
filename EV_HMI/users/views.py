@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.views.generic import DetailView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm
 from .models import Company, CompanyEmployee
@@ -66,6 +67,7 @@ def create_company(request):
 
 class CompanyDetailView(DetailView):
     model = Company
+    context_object_name = 'object'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,3 +92,41 @@ def register_employee(request, pk):
     else:
         form = UserRegisterForm()
     return render(request, 'users/register_employee.html', {'form': form, 'company': company, 'title': 'Add Employee', 'sidebar': 'Settings'})
+
+
+class UserDetailView(DetailView):
+    model = User
+    context_object_name = 'object'
+    template_name = 'users/user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'User'
+        context['sidebar'] = 'Settings'
+        return context
+
+
+@login_required
+def user_edit(request, pk):
+    user = User.objects.get(pk=pk)
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'The User has been updated!')
+            return redirect('user-detail', user.pk)
+
+    else:
+        u_form = UserUpdateForm(instance=user)
+        p_form = ProfileUpdateForm(instance=user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'object': user,
+        'title': 'Profile Edit',
+        'sidebar': 'Settings',
+    }
+    return render(request, 'users/user_edit.html', context)

@@ -36,6 +36,7 @@ class Profile(models.Model):
 
 class Company(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    logo = models.ImageField(default='logos/default.jpg', upload_to='logos')
     image = models.ImageField(default='company_pics/default.jpg', upload_to='company_pics')
 
     def __str__(self):
@@ -45,15 +46,25 @@ class Company(models.Model):
         super(Company, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
+
+        if img.height > 700 or img.width > 700:
+            output_size = (700, 700)
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(self.image.path)
+
+        img = Image.open(self.logo.path)
         img = crop_center(img, min(img.size), min(img.size))
 
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
 
     def get_absolute_url(self):
         return reverse('company-detail', kwargs={'pk': self.pk})
+
+    def get_employees(self):
+        return self.companyemployee_set.all().order_by('user')
 
 
 class CompanyAddress(models.Model):
