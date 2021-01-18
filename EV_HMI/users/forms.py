@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Company
 
 
 class UserRegisterForm(UserCreationForm):
@@ -30,3 +30,16 @@ class CompanyCreateForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name']
+
+
+class GroupUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ['name']
+
+
+class CompanyUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ['homepage', 'logo', 'image']
+

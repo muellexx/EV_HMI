@@ -2,14 +2,9 @@
 {% load auth_extras %}
 
 {% block panel_topright_button %}
-{{ user }}
-{{ object }}
-{% if user.is_staff %}
-{% endif %}
 {% has_group user object.group as is_group %}
 {% if user.is_staff or user.is_admin or is_group %}
-<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'user-edit' object.pk%}">Edit</a>
-<a class="btn waves-effect waves-light z-depth-3 red" href="#">Delete</a>
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'user-edit' object.pk %}">Edit</a>
 {% endif %}
 {% endblock panel_topright_button %}
 

@@ -36,11 +36,16 @@ class Profile(models.Model):
 
 class Company(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    homepage = models.URLField(max_length=100, blank=True, null=True)
     logo = models.ImageField(default='logos/default.jpg', upload_to='logos')
     image = models.ImageField(default='company_pics/default.jpg', upload_to='company_pics')
 
     def __str__(self):
         return self.group.name
+
+    def delete(self):
+        self.group.delete()
+        super(Company, self).delete()
 
     def save(self, *args, **kwargs):
         super(Company, self).save(*args, **kwargs)
@@ -58,7 +63,7 @@ class Company(models.Model):
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
-            img.save(self.image.path)
+            img.save(self.logo.path)
 
     def get_absolute_url(self):
         return reverse('company-detail', kwargs={'pk': self.pk})

@@ -5,6 +5,8 @@
 {% has_group user object.group as is_group %}
 {% if user.is_staff or user.is_admin or is_group %}
 <a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'register-employee' object.pk %}">Add Employee</a>
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'company-edit' object.pk %}">Edit Company</a>
+<a class="btn waves-effect waves-light z-depth-3 mr-3 red" href="#">Delete Company</a>
 {% endif %}
 {% endblock panel_topright_button %}
 
@@ -16,18 +18,19 @@
 <div class="card horizontal">
     <div class="card-stacked">
         <div class="card-content py-1">
-                <img class="responsive-img company-img" src="{{ object.image.url }}">
+            <img class="responsive-img company-img" src="{{ object.image.url }}">
             <div class="row valign-wrapper mb-0 mt-1">
                 <div style="float:left;"><img class="circle account-img" src="{{ object.logo.url }}"></div>
                 <div class="full-wh mr-5">
                     <h4>{{ object.group }}</h4>
-                    <span class="article-title card-title">{{ object.title }}</span>
                 </div>
             </div>
+            {% if object.homepage %}
+            <p>Hompage: <a href="{{ object.homepage }}" target="_blank">{{ object.homepage }}</a></p>
+            {% endif %}
         </div>
-        <div class="card-action card-content">
+        <div class="card-panel mb-0">
             {% for employee in object.get_employees %}
-
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content py-1">

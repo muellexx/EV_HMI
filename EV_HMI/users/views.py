@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm
+from django.views.generic import DetailView, DeleteView
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CompanyCreateForm, CompanyUpdateForm, GroupUpdateForm
 from .models import Company, CompanyEmployee
 from .decorators import user_is_authorized
 
@@ -19,6 +20,19 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form, 'title': 'Register', 'sidebar': 'Profile'})
+
+
+def create_user(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'A new User has successfully been created!')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'users/user_create.html', {'form': form, 'title': 'Create User', 'sidebar': 'Settings'})
 
 
 @login_required
@@ -130,3 +144,64 @@ def user_edit(request, pk):
         'sidebar': 'Settings',
     }
     return render(request, 'users/user_edit.html', context)
+
+
+@login_required
+def company_edit(request, pk):
+    company = Company.objects.get(pk=pk)
+    if company.homepage:
+        print('hi')
+    if request.method == 'POST':
+        g_form = GroupUpdateForm(request.POST, instance=company.group)
+        c_form = CompanyUpdateForm(request.POST, request.FILES, instance=company)
+        if g_form.is_valid() and c_form.is_valid():
+            g_form.save()
+            c_form.save()
+            messages.success(request, f'The Company has been updated!')
+            return redirect('company-detail', company.pk)
+
+    else:
+        g_form = GroupUpdateForm(instance=company.group)
+        c_form = CompanyUpdateForm(instance=company)
+
+    context = {
+        'u_form': g_form,
+        'p_form': c_form,
+        'object': company,
+        'title': 'Profile Edit',
+        'sidebar': 'Settings',
+    }
+    return render(request, 'users/company_edit.html', context)
+
+
+class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Company
+    success_url = '/'
+
+    def test_func(self):
+        if self.request.user.is_staff:
+            return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete Company'
+        context['sidebar'] = 'Settings'
+        return context
+
+
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = User
+    success_url = '/'
+    template_name = 'users/user_confirm_delete.html'
+
+    def test_func(self):
+        if self.request.user.is_staff:
+            return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete User'
+        context['sidebar'] = 'Settings'
+        return context
