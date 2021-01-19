@@ -4,6 +4,7 @@
 {% url 'password-change' as url_password_change %}
 {% url 'settings-company-list' as url_company_list %}
 {% url 'create-company' as url_create_company %}
+{% url 'create-user' as url_create_user %}
 
 
 <a href="{{ url_profile_edit }}" class="sidebar-item collection-item {% if request.get_full_path == url_profile_edit %}active{% endif %}">Profile Edit</a>
@@ -11,5 +12,6 @@
 <a href="{{ url_settings }}" class="sidebar-item collection-item {% if request.get_full_path == url_settings %}active{% endif %}">User List</a>
 <a href="{{ url_company_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_company_list %}active{% endif %}">Company List</a>
 {% if user.is_staff %}
+<a href="{{ url_create_user }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_user %}active{% endif %}">Create User</a>
 <a href="{{ url_create_company }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_company %}active{% endif %}">Create Company</a>
 {% endif %}

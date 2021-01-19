@@ -6,7 +6,6 @@
 {% if user.is_staff or user.is_admin or is_group %}
 <a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'register-employee' object.pk %}">Add Employee</a>
 <a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'company-edit' object.pk %}">Edit Company</a>
-<a class="btn waves-effect waves-light z-depth-3 mr-3 red" href="#">Delete Company</a>
 {% endif %}
 {% endblock panel_topright_button %}
 

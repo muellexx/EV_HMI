@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.db.models.functions import Lower
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -15,7 +15,7 @@ class UserListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(UserListView, self).get_context_data(**kwargs)
-        context['users'] = User.objects.all()
+        context['users'] = User.objects.all().order_by(Lower('username'))
         context['title'] = 'User List'
         context['sidebar'] = 'Settings'
         return context
@@ -31,7 +31,7 @@ class CompanyListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CompanyListView, self).get_context_data(**kwargs)
-        context['companies'] = Company.objects.all()
+        context['companies'] = Company.objects.all().order_by(Lower('group'))
         context['title'] = 'Company List'
         context['sidebar'] = 'Settings'
         return context

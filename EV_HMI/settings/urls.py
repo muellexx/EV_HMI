@@ -3,6 +3,6 @@ from .views import UserListView, CompanyListView
 from . import views
 
 urlpatterns = [
-    path('', UserListView.as_view(), name='settings-user-list'),
-    path('companies/', CompanyListView.as_view(), name='settings-company-list'),
+    path('user_list/', UserListView.as_view(), name='settings-user-list'),
+    path('company_list/', CompanyListView.as_view(), name='settings-company-list'),
 ]

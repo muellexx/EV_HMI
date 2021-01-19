@@ -23,8 +23,17 @@ Companies
                 </div>
             </div>
         </div>
-        <div class="card-action card-content">
-            <p></p>
+        <div class="card-panel mb-0">
+            <div class="card-panel">
+                {% for employee in company.get_employees %}
+                <div class="row valign-wrapper mb-0 mt-1">
+                    <img class="circle account-img-small" src="{{ employee.user.profile.image.url }}">
+                    <div class="full-wh mr-5">
+                        <p><a href="{% url 'user-detail' employee.user.pk %}" class="mr-2">{{ employee.user.username }}</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

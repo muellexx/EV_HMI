@@ -20,11 +20,25 @@ Users
                 <img class="circle account-img-small" src="{{ user.profile.image.url }}">
                 <div class="full-wh mr-5">
                     <p><a href="{% url 'user-detail' user.pk %}" class="mr-2">{{ user }}</a></p>
+                    {% if user.is_superuser %}
+                    <p>Admin</p>
+                    {% elif user.is_staff %}
+                    <p>Staff</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <div class="card-action card-content">
-            <p></p>
+        <div class="card-panel mb-0">
+            {% for company in user.profile.get_companies %}
+            <div class="card-panel">
+                <div class="row valign-wrapper mb-0 mt-1">
+                    <img class="circle account-img-small" src="{{ company.company.image.url }}">
+                    <div class="full-wh mr-5">
+                        <p><a href="{% url 'company-detail' company.company.pk %}" class="mr-2">{{ company.company.group }}</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -26,10 +26,10 @@ def create_user(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'A new User has successfully been created!')
-            return redirect('login')
+            return redirect('user-detail', user.pk)
     else:
         form = UserRegisterForm()
     return render(request, 'users/user_create.html', {'form': form, 'title': 'Create User', 'sidebar': 'Settings'})
@@ -73,7 +73,7 @@ def create_company(request):
             company = Company(group=group)
             company.save()
             messages.success(request, f'You successfully created a new company.')
-            return redirect('profile')
+            return redirect('company-detail', company.pk)
     else:
         form = CompanyCreateForm()
     return render(request, 'users/company_create.html', {'form': form, 'title': 'Company Create', 'sidebar': 'Settings'})
@@ -86,7 +86,7 @@ class CompanyDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Company Detail'
-        context['sidebar'] = 'Profile'
+        context['sidebar'] = 'Settings'
         return context
 
 
@@ -102,7 +102,7 @@ def register_employee(request, pk):
             company_employee.save()
             company.group.user_set.add(user)
             messages.success(request, f'You successfully added an employee')
-            return redirect('login')
+            return redirect('user-detail', user.pk)
     else:
         form = UserRegisterForm()
     return render(request, 'users/register_employee.html', {'form': form, 'company': company, 'title': 'Add Employee', 'sidebar': 'Settings'})
@@ -194,6 +194,7 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
     success_url = '/'
     template_name = 'users/user_confirm_delete.html'
+    context_object_name = 'object'
 
     def test_func(self):
         if self.request.user.is_staff:

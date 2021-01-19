@@ -11,16 +11,10 @@ Create User
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn waves-effect waves-light z-depth-3" type="submit" name="action">Sign Up
+                <button class="btn waves-effect waves-light z-depth-3" type="submit" name="action">Create User
                     <i class="material-icons right">send</i>
                 </button>
-
             </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">
-                    Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Log In</a>
-                </small>
-            </div>
         </div>
     </div>
 </div>
