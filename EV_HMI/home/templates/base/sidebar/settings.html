@@ -15,3 +15,9 @@
 <a href="{{ url_create_user }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_user %}active{% endif %}">Create User</a>
 <a href="{{ url_create_company }}" class="sidebar-item collection-item {% if request.get_full_path == url_create_company %}active{% endif %}">Create Company</a>
 {% endif %}
+
+{% if user.is_staff %}
+<p class="ml-5 mb-0">Global Settings</p>
+{% url 'connectortype-create' as url_connectortype_create %}
+<a href="{{ url_connectortype_create }}" class="sidebar-item collection-item {% if request.get_full_path == url_connectortype_create %}active{% endif %}">Create Connector Type</a>
+{% endif %}
