@@ -1,5 +1,5 @@
 {% extends "base/base_panel.html" %}
-{% load crispy_forms_tags %}
+{% load material_form %}
 {% block panel_title %}
 Edit Post
 {% endblock panel_title %}
@@ -10,7 +10,7 @@ Edit Post
         <div class="card-panel">
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% form form=form %}{% endform %}
                 <button class="btn waves-effect waves-light z-depth-3" type="submit" name="action">Post
                     <i class="material-icons right">send</i>
                 </button>

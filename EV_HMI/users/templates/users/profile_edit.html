@@ -1,4 +1,6 @@
 {% extends "base/base_panel.html" %}
+{% load material_form %}
+
 {% block panel_title %}
 Profile
 {% endblock panel_title %}
@@ -16,8 +18,8 @@ Profile
             </div>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ u_form.as_p }}
-                {{ p_form.as_p }}
+                {% form form=u_form %}{% endform %}
+                {% form form=p_form %}{% endform %}
                 <button class="btn waves-effect waves-light orange z-depth-3" type="submit" name="action">Update
                     <i class="material-icons right">send</i>
                 </button>

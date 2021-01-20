@@ -4,6 +4,7 @@ from users.models import Company
 
 class ConnectorType(models.Model):
     name = models.CharField(max_length=255)
+    dc_charging = models.BooleanField(default=False, verbose_name='DC Charging')
 
 
 class ChargingStation(models.Model):

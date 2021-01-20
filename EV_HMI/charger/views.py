@@ -11,7 +11,7 @@ def dashboard(request):
 
 class ConnectorTypeCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = ConnectorType
-    fields = ['name']
+    fields = ['name', 'dc_charging']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
