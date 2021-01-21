@@ -1,10 +1,17 @@
 from django.db import models
+from django.urls import reverse
 from users.models import Company
 
 
 class ConnectorType(models.Model):
     name = models.CharField(max_length=255)
     dc_charging = models.BooleanField(default=False, verbose_name='DC Charging')
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('connectortype-create', kwargs={'pk': self.pk})
 
 
 class ChargingStation(models.Model):
