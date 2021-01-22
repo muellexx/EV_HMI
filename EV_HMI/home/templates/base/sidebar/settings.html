@@ -18,6 +18,6 @@
 
 {% if user.is_staff %}
 <p class="ml-5 mb-0">Global Settings</p>
-{% url 'connectortype-create' as url_connectortype_create %}
-<a href="{{ url_connectortype_create }}" class="sidebar-item collection-item {% if request.get_full_path == url_connectortype_create %}active{% endif %}">Create Connector Type</a>
+{% url 'connectortype-list' as url_connectortype_list %}
+<a href="{{ url_connectortype_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_connectortype_list %}active{% endif %}">Connector Types</a>
 {% endif %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, TemplateView, DetailView
+from django.views.generic import CreateView, TemplateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import ConnectorType
 
@@ -23,6 +23,17 @@ class ConnectorTypeCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateVie
         if self.request.user.is_superuser:
             return True
         return False
+
+
+class ConnectorTypeListView(ListView):
+    model = ConnectorType
+    context_object_name = 'connectortypes'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Connector Type'
+        context['sidebar'] = 'Settings'
+        return context
 
 
 class ConnectorTypeDetailView(DetailView):

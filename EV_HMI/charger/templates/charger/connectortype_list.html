@@ -1,0 +1,32 @@
+{% extends "base/base_panel.html" %}
+
+{% block panel_topright_button %}
+{% if user.is_staff %}
+<a class="btn waves-effect waves-light z-depth-3" href="{% url 'connectortype-create' %}">Add Connector Type</a>
+{% endif %}
+{% endblock panel_topright_button %}
+
+{% block panel_title %}
+Connector Types
+{% endblock panel_title %}
+
+{% block panel_content %}
+
+{% for connectortype in connectortypes %}
+<div class="card horizontal">
+    <div class="card-stacked">
+        <div class="card-content py-1">
+            <div class="row valign-wrapper mb-0 mt-1">
+                <img class="circle account-img-small" src="{% if connectortype.dc_charging %}{{ MEDIA_URL }}icons/DC.jpg{% else %}{{ MEDIA_URL }}icons/AC.jpg{% endif %}">
+                <div class="full-wh mr-5">
+                    <span class="card-title"><a class="article-title" href="{% url 'connectortype-detail' connectortype.id %}">{{ connectortype.name }}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock panel_content %}
