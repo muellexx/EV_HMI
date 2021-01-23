@@ -1,0 +1,31 @@
+{% extends "base/base_panel.html" %}
+
+{% block panel_topright_button %}
+{% if user.is_staff %}
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="#">Edit</a>
+<a class="btn waves-effect waves-light z-depth-3 red" href="#">Delete</a>
+{% endif %}
+{% endblock panel_topright_button %}
+
+{% block panel_title %}
+{{ title }}
+{% endblock panel_title %}
+
+{% block panel_content %}
+<div class="card horizontal">
+    <div class="card-stacked">
+        <div class="card-content py-1">
+            <div class="row valign-wrapper mb-0 mt-1">
+                <img class="circle account-img-small" src="{% if object.dc_charging %}{{ MEDIA_URL }}icons/DC.jpg{% else %}{{ MEDIA_URL }}icons/AC.jpg{% endif %}">
+                <div class="full-wh mr-5">
+                    <span class="article-title card-title">{{ object.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-action card-content">
+            <p>{{ object.content }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock panel_content %}

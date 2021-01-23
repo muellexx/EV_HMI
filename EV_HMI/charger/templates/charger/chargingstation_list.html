@@ -1,0 +1,31 @@
+{% extends "base/base_panel.html" %}
+
+{% block panel_topright_button %}
+{% if user.is_staff %}
+<a class="btn waves-effect waves-light z-depth-3" href="{% url 'chargingstation-create' %}">Add Charging Station</a>
+{% endif %}
+{% endblock panel_topright_button %}
+
+{% block panel_title %}
+Connector Types
+{% endblock panel_title %}
+
+{% block panel_content %}
+
+{% for chargingstation in chargingstations %}
+<div class="card horizontal">
+    <div class="card-stacked">
+        <div class="card-content py-1">
+            <div class="row valign-wrapper mb-0 mt-1">
+                <div class="full-wh mr-5">
+                    <span class="card-title"><a class="article-title" href="{% url 'chargingstation-detail' chargingstation.id %}">{{ chargingstation.name }}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock panel_content %}

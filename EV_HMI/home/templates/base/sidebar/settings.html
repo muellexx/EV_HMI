@@ -19,5 +19,7 @@
 {% if user.is_staff %}
 <p class="ml-5 mb-0">Global Settings</p>
 {% url 'connectortype-list' as url_connectortype_list %}
+{% url 'chargingstation-list' as url_chargingstation_list %}
+<a href="{{ url_chargingstation_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_chargingstation_list %}active{% endif %}">Charging Stations</a>
 <a href="{{ url_connectortype_list }}" class="sidebar-item collection-item {% if request.get_full_path == url_connectortype_list %}active{% endif %}">Connector Types</a>
 {% endif %}
