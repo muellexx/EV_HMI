@@ -4,6 +4,7 @@ from django.views.generic import CreateView, TemplateView, DetailView, ListView,
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import ConnectorType, ChargingStation, ChargingPoint, Connector
 from .forms import ChargingStationForm
+from map.utils import json_stations
 
 
 def dashboard(request):
@@ -90,6 +91,11 @@ class ChargingStationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateV
         if self.request.user.is_superuser:
             return True
         return False
+
+    def form_valid(self, form):
+        redirect_url = super().form_valid(form)
+        json_stations()
+        return redirect_url
 
 
 class ChargingStationListView(ListView):
