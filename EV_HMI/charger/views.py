@@ -66,7 +66,7 @@ class ChargingStationCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateV
     def form_valid(self, form):
         charging_station = form.save()
         connector_types = form.cleaned_data['connectortype']
-        for i in range(charging_station.num_points):
+        for i in range(form.cleaned_data['num_points']):
             point = ChargingPoint(station=charging_station, point_id=i)
             point.save()
             for j, connector_type in enumerate(connector_types):

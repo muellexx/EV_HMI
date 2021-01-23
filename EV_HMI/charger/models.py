@@ -20,13 +20,19 @@ class ChargingStation(models.Model):
     lat = models.FloatField(default=47.423375435000004, validators=[MaxValueValidator(90), MinValueValidator(-90)])
     lng = models.FloatField(default=7.480080040614551, validators=[MaxValueValidator(180), MinValueValidator(-180)])
     company = models.ForeignKey(Company, null=True, blank=True, on_delete=models.SET_NULL)
-    num_points = models.PositiveSmallIntegerField(default=1, validators=[MaxValueValidator(100), MinValueValidator(0)])
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('chargingstation-detail', kwargs={'pk': self.pk})
+
+    def get_connectortypes(self):
+        return ConnectorType.objects.filter(connector__in=Connector.objects.filter(charging_point__in=ChargingPoint.objects.filter(station=self))).distinct()
+
+
+    def chargingpoint_count(self):
+        return self.chargingpoint_set.count()
 
 
 class ChargingPoint(models.Model):
