@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-from .views import ConnectorTypeCreateView, ConnectorTypeDetailView, ConnectorTypeListView, ChargingStationCreateView, ChargingStationDetailView, ChargingStationListView
+from .views import ConnectorTypeCreateView, ConnectorTypeDetailView, ConnectorTypeListView, ChargingStationCreateView,\
+    ChargingStationDetailView, ChargingStationUpdateView, ChargingStationListView
 
 urlpatterns = [
     path('dashboard/', views.dashboard, name='charger-dashboard'),
@@ -8,6 +9,7 @@ urlpatterns = [
     path('connector_type/', ConnectorTypeListView.as_view(), name='connectortype-list'),
     path('connector_type/<int:pk>/', ConnectorTypeDetailView.as_view(), name='connectortype-detail'),
     path('charging_station/create/', ChargingStationCreateView.as_view(), name='chargingstation-create'),
+    path('charging_station/<int:pk>/edit/', ChargingStationUpdateView.as_view(), name='chargingstation-edit'),
     path('charging_station/', ChargingStationListView.as_view(), name='chargingstation-list'),
     path('charging_station/<int:pk>/', ChargingStationDetailView.as_view(), name='chargingstation-detail'),
 ]

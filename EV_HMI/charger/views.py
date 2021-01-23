@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import CreateView, TemplateView, DetailView, ListView
+from django.views.generic import CreateView, TemplateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import ConnectorType, ChargingStation, ChargingPoint, Connector
 from .forms import ChargingStationForm
@@ -54,7 +54,7 @@ class ChargingStationCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateV
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Create Connector Type'
+        context['title'] = 'Add Charging Station'
         context['sidebar'] = 'Settings'
         return context
 
@@ -73,9 +73,23 @@ class ChargingStationCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateV
                 connector = Connector(charging_point=point, connector_type=connector_type, connector_id=j)
                 connector.save()
 
-        print(charging_station.num_points)
-        print(form.cleaned_data['connectortype'])
         return HttpResponseRedirect(self.model.get_absolute_url(charging_station))
+
+
+class ChargingStationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ChargingStation
+    fields = ['name', 'lat', 'lng', 'company']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Charging Station'
+        context['sidebar'] = 'Settings'
+        return context
+
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
 
 
 class ChargingStationListView(ListView):

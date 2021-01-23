@@ -2,7 +2,7 @@
 
 {% block panel_topright_button %}
 {% if user.is_staff %}
-<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="#">Edit</a>
+<a class="btn waves-effect waves-light z-depth-3 mr-3 orange" href="{% url 'chargingstation-edit' object.id %}">Edit</a>
 <a class="btn waves-effect waves-light z-depth-3 red" href="#">Delete</a>
 {% endif %}
 {% endblock panel_topright_button %}
