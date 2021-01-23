@@ -16,14 +16,41 @@
     <div class="card-stacked">
         <div class="card-content py-1">
             <div class="row valign-wrapper mb-0 mt-1">
-                <img class="circle account-img-small" src="{% if object.dc_charging %}{{ MEDIA_URL }}icons/DC.jpg{% else %}{{ MEDIA_URL }}icons/AC.jpg{% endif %}">
+                <img class="account-img" src="{{ MEDIA_URL }}icons/charger.jpg">
                 <div class="full-wh mr-5">
-                    <span class="article-title card-title">{{ object.name }}</span>
+                    <h4 class="article-title">{{ object.name }}</h4>
+                    <p>Available Stalls: TODO/{{ object.chargingpoint_count }}</p>
+                    <p>Available Stalls: TODO/{{ object.chargingpoint_count }}</p>
+                </div>
+                <div class="full-wh mr-5">
+                    <h5 class="article-title">Connectors:</h5>
+                    {% for charging_type in object.get_connectortypes %}
+                    <p>{{ charging_type }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="card-action card-content">
-            <p>{{ object.content }}</p>
+        <div class="card-panel mb-0">
+            <div class="row flex-row mb-0">
+                {% for charging_point in object.get_chargingpoints %}
+                <div class="col s4 card m-1">
+                    <div class="full-wh mr-5">
+                        <span class="card-title"><a class="article-title" href="{% url 'chargingstation-detail' chargingstation.id %}">{{ charging_point }}</a></span>
+                        <div class="row valign-wrapper mb-0 mt-1">
+                        <div class="full-wh mr-5">
+                            <p class="m-0 valign-wrapper"><i class="material-icons green-text medium z-depth-2 circle m-1">check_circle</i>TODO</p>
+                            <i class="material-icons orange-text">info</i>
+                            <i class="material-icons red-text">cancel</i>
+                        </div>
+                        <div class="full-wh mr-5">
+                            {% for charging_type in charging_point.get_connectortypes %}
+                            <p class="m-0">{{ charging_type }}</p>
+                            {% endfor %}
+                        </div>
+                    </div></div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

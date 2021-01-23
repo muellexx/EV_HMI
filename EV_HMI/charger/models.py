@@ -30,6 +30,8 @@ class ChargingStation(models.Model):
     def get_connectortypes(self):
         return ConnectorType.objects.filter(connector__in=Connector.objects.filter(charging_point__in=ChargingPoint.objects.filter(station=self))).distinct()
 
+    def get_chargingpoints(self):
+        return self.chargingpoint_set.all()
 
     def chargingpoint_count(self):
         return self.chargingpoint_set.count()
@@ -44,6 +46,9 @@ class ChargingPoint(models.Model):
 
     def __str__(self):
         return self.station.name + ' - Point ' + str(self.point_id)
+
+    def get_connectortypes(self):
+        return ConnectorType.objects.filter(connector__in=Connector.objects.filter(charging_point=self))
 
 
 class Connector(models.Model):

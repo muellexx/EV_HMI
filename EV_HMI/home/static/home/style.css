@@ -115,3 +115,7 @@ textarea {
   margin-left: auto;
   margin-right: auto;
 }
+
+.flex-row {
+  display: flex;
+}

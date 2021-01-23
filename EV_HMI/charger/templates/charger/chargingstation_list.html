@@ -23,14 +23,14 @@ Connector Types
             </div>
         </div>
         <div class="card-panel mb-0">
-            <div class="row">
-                <div class="col s3 card-panel m-1">
+            <div class="row flex-row mb-0">
+                <div class="col s3 card m-1">
                     <div class="full-wh mr-5">
                         <p>Charging Stalls: {{ chargingstation.chargingpoint_count }}</p>
                         <p>Available Stalls: Todo</p>
                     </div>
                 </div>
-                <div class="col s3 card-panel m-1">
+                <div class="col s3 card m-1">
                     <div class="full-wh mr-5">
                         {% for charging_type in chargingstation.get_connectortypes %}
                         <p>{{ charging_type }}</p>
